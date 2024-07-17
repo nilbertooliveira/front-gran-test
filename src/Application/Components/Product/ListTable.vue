@@ -64,10 +64,12 @@
 
   <div class="flex flex-col md:flex-row items-start md:items-center space-y-3 md:space-y-0 p-4 justify-center">
     <vue-awesome-paginate
-        :total-items="50"
+        :total-items="showCount"
         :items-per-page="5"
         :max-pages-shown="3"
         v-model="currentPage"
+        :show-ending-buttons="true"
+        :show-breakpoint-buttons="false"
         @click="onClickHandler"
     />
   </div>
@@ -96,13 +98,16 @@ export default defineComponent({
       },
       computed: {
         computedItems() {
-          if (this.filters?.length === 0){
+          if (this.filters?.length === 0) {
             return this.products;
           }
           return this.products.filter(item =>
-             this.filters?.indexOf(item.category) !== -1
-         );
-
+              this.filters?.indexOf(item.category) !== -1
+          );
+        },
+        showCount(): number {
+          console.log('this.products.length', this.products.length);
+          return this.products.length === 0 ? 1 : this.products.length;
         }
       },
       setup() {
