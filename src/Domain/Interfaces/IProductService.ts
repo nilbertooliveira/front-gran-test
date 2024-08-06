@@ -1,4 +1,3 @@
-import {Product} from "./Product";
 import {Response} from "./Response";
 
 export interface IProductService {
